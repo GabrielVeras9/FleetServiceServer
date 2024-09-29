@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exibição de Linha com Leaflet a partir de um Endpoint</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Adicionando Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+
+  <style>
+    /* Definindo o tamanho do mapa */
+    #map {
+      height: 400px;
+    }
+  </style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script> <!-- Adicionando Axios para fazer requisições HTTP -->
+
+<script>
+  var map = L.map('map').setView([-15.79991, -47.87785], 13); // Define a visualização do mapa
+
+  // Adiciona o mapa base (TileLayer) do OpenStreetMap
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
+  }).addTo(map);
+
+  // Função para buscar os dados do endpoint e adicionar a linha ao mapa
+  async function getRouteFromEndpoint() {
+    const endpoint = '/rota/trajeto/geojson';
+
+    try {
+      const response = await fetch(endpoint);
+      const data = await response.text();
+      const [extension, averageTime, geoJSONData] = data.split(',');
+
+      console.log('Extensão:', extension);
+      console.log('Tempo Médio:', averageTime);
+
+      const geoJSON = JSON.parse(geoJSONData);
+
+      L.geoJSON(geoJSON, {
+        style: { color: 'red' }
+      }).addTo(map);
+
+    } catch (error) {
+      console.error('Erro ao obter dados do endpoint:', error);
+    }
+  }
+
+  // Chamada da função para buscar e desenhar a linha
+  getRouteFromEndpoint();
+</script>
+
+</body>
+</html>

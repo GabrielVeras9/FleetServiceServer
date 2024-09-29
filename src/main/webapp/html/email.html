@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Envio de Email</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        
+        #emailForm {
+            width: 300px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        
+        #emailForm label,
+        #emailForm select,
+        #emailForm textarea,
+        #emailForm input[type="submit"] {
+            display: block;
+            margin-bottom: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        #emailForm input[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <form id="emailForm">
+        <label for="subject">Assunto:</label>
+        <select id="subject" name="subject" required>
+            <option value="">Selecione um assunto</option>
+            <option value="Sistema com problema">Sistema com problema</option>
+            <option value="Dificuldade">Dificuldade</option>
+            <option value="Dúvidas">Dúvidas</option>
+        </select><br><br>
+
+        <label for="text">Mensagem:</label><br>
+        <textarea id="text" name="text" rows="4" cols="50" required></textarea><br><br>
+
+        <input type="submit" value="Enviar Email">
+    </form>
+
+    <script>
+        document.getElementById('emailForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const emailData = {
+                to: 'gabriel.veras@semob.df.gov.br', // Substitua pelo email fixo de destino
+                subject: document.getElementById('subject').value,
+                text: document.getElementById('text').value
+            };
+
+            fetch('/email/send', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(emailData)
+                })
+                .then(response => response.text())
+                .then(data => {
+                    alert(data); // Exibe a resposta do servidor (E-mail enviado com sucesso)
+                })
+                .catch(error => {
+                    console.error('Erro:', error);
+                    alert('Houve um erro ao enviar o email.');
+                });
+        });
+    </script>
+</body>
+
+</html>

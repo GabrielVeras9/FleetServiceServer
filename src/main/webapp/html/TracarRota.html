@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastrar Rota</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <style>
+        #map {
+            height: 400px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="map" style="position: absolute; top: 10px; right: 20px; width: 1300px; height: 730px;"></div>
+    <div id="routeDetails">
+        <ul>
+            <li><b>Extensão (km):</b> <span id="routeDistance"></span></li>
+            <li><b>Tempo Médio:</b> <span id="routeTime"></span></li>
+        </ul>
+    </div>
+    <button id="saveRoute">Salvar Coordenadas do Percurso</button>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.js"></script>
+    <script>
+        var map = L.map('map').setView([-15.8267, -47.9218], 12);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        var control = L.Routing.control({
+            waypoints: [
+                L.latLng(-15.8267, -47.9218),
+                L.latLng(-15.8506, -47.9292) // Exemplo de um segundo ponto
+            ],
+            routeWhileDragging: true
+        }).addTo(map);
+
+        var coordinates = []; // Array para armazenar as coordenadas do percurso
+        var routeSummary = {
+            distance: 0,
+            time: 0
+        };
+
+        control.on('routesfound', function(e) {
+            var route = e.routes[0].coordinates;
+            coordinates = route.map(coordinate => ({
+                lat: coordinate.lat,
+                lng: coordinate.lng
+            }));
+
+            routeSummary.distance = e.routes[0].summary.totalDistance / 1000; // Convertendo metros para quilômetros
+            routeSummary.time = e.routes[0].summary.totalTime;
+
+            // Atualizando os elementos da lista na lateral
+            document.getElementById('routeDistance').innerText = routeSummary.distance.toFixed(2) + ' km';
+            document.getElementById('routeTime').innerText = Math.floor(routeSummary.time / 60) + ' minutos';
+            });
+
+        // Ao clicar no botão "Salvar Rota"
+		   document.getElementById('saveRoute').addEventListener('click', function() {
+		    var routeData = coordinates.map(coordinate => ({
+		        lat: coordinate.lat,
+		        lng: coordinate.lng,
+		        extensao: routeSummary.distance.toFixed(2),
+		        tempoMedio: Math.floor(routeSummary.time / 60)
+		    }));
+		
+		    // Envia os dados para o backend
+		    fetch('/api/rota/salvar', {
+		        method: 'POST',
+		        headers: {
+		            'Content-Type': 'application/json'
+		        },
+		        body: JSON.stringify(routeData)
+		    })
+		    .then(response => response.json())
+		    .then(data => {
+		        console.log('Informações do percurso salvas no backend:', data);
+		        // Faça algo com a resposta do backend, se necessário
+		    })
+		    .catch(error => {
+		        console.error('Erro ao salvar informações do percurso:', error);
+		        // Trate os erros, se necessário
+		    });
+		});
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Usuario</title>
+</head>
+
+<body>
+    <form id="cadastroForm" onsubmit="return validarFormulario()">
+        <!-- Campos do formulário de usuário -->
+        <h2>Dados do Usuario</h2>
+        <label for="nom_usuario">Nome de Usuário:</label>
+        <input type="text" id="nom_usuario" name="nom_usuario" placeholder="Nome de usuário" required pattern="[A-Za-zÀ-ú ]*" title="Apenas letras são permitidas"><br><br>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" placeholder="Email" required><br><br>
+        <label for="confirmar_email">Confirmar Email:</label>
+        <input type="email" id="confirmar_email" name="confirmar_email" placeholder="Confirmar Email" required><br><br>
+        <label for="senha">Senha:</label>
+        <input type="password" id="senha" name="senha" placeholder="Senha" required><br><br>
+        <label for="confirmar_senha">Confirmar Senha:</label>
+        <input type="password" id="confirmar_senha" name="confirmar_senha" placeholder="Confirmar Senha" required><br><br>
+        <label for="cpf_usuario">CPF:</label>
+        <input type="text" id="cpf_usuario" name="cpf_usuario" placeholder="CPF" required pattern="[0-9]*" title="Apenas números são permitidos"><br><br>
+        <label for="rg_usuario">RG:</label>
+        <input type="text" id="rg_usuario" name="rg_usuario" placeholder="RG" required pattern="[0-9]*" title="Apenas números são permitidos"><br><br>
+        <!-- Endereço do Motorista -->
+        <label for="cep_usuario">CEP:</label>
+        <input type="text" id="cep_usuario" name="cep_usuario" required onchange="buscaCep('usuario')" required pattern="[0-9]*" title="Apenas números são permitidos"><br><br>
+        <label for="cidade_usuario">Cidade:</label>
+        <input type="text" id="cidade_usuario" name="cidade_usuario" required><br><br>
+        <label for="bairro_usuario">Bairro:</label>
+        <input type="text" id="bairro_usuario" name="bairro_usuario" required>
+        <!--Operadora-->
+        <h2>Dados da Operadora</h2>
+        <label for="nom_operadora">Nome da operadora:</label>
+        <input type="text" id="nom_operadora" name="nom_operadora" placeholder="Nome da operadora" required><br><br>
+        <label for="cnpj">cnpj:</label>
+        <input type="text" id="cnpj" name="cnpj" placeholder="cnpj da operadora" required pattern="[0-9]*" title="Apenas números são permitidos"><br><br>
+        <!--Serviço-->
+        <h2>Dados do Serviço</h2>
+        <label for="servico">servico:</label>
+        <input type="text" id="servico" name="servico" placeholder="servico" required pattern="[A-Za-zÀ-ú ]*" title="Apenas letras são permitidas"><br><br>
+        <label for="nom_servico">nome servico:</label>
+        <input type="text" id="nom_servico" name="nom_servico" placeholder="nome do servico" required pattern="[A-Za-zÀ-ú ]*" title="Apenas letras são permitidas"><br><br>
+        <!--Contrato-->
+        <h2>Dados do Contrato</h2>
+        <label for="num_contrato">numero do contrato:</label>
+        <input type="text" id="num_contrato" name="num_contrato" placeholder="numero do contrato" required pattern="[0-9]*" title="Apenas números são permitidos"><br><br>
+        <label for="inicio">Início contrato:</label>
+        <input type="date" id="inicio" name="inicio" required><br><br>
+        <label for="fim">Fim contrato:</label>
+        <input type="date" id="fim" name="fim" required><br><br>
+        <label for="doc_img">Documento:</label>
+        <input type="file" id="doc_img"><br><br>
+        <button type="submit">Cadastrar</button>
+    </form>
+
+    <script>
+        function validarFormulario() {
+            var email = document.getElementById('email').value;
+            var confirmarEmail = document.getElementById('confirmar_email').value;
+            var senha = document.getElementById('senha').value;
+            var confirmarSenha = document.getElementById('confirmar_senha').value;
+
+            if (email !== confirmarEmail) {
+                alert('Os campos de email não correspondem.');
+                return false;
+            }
+
+            if (senha !== confirmarSenha) {
+                alert('Os campos de senha não correspondem.');
+                return false;
+            }
+
+            return true;
+        }
+        //VIA CEP API
+        function buscaCep(tipo) {
+            const cep = tipo === 'usuario' ? document.getElementById('cep_usuario').value : document.getElementById('cep_veiculo').value;
+            const url = `https://viacep.com.br/ws/${cep}/json/`;
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.erro) {
+                        alert('CEP não encontrado');
+                    } else {
+                        if (tipo === 'usuario') {
+                            document.getElementById('cidade_usuario').value = data.localidade;
+                            document.getElementById('bairro_usuario').value = data.bairro;
+                        }
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro:', error);
+                    alert('Erro ao buscar CEP. Tente novamente.');
+                });
+        }
+        const form = document.getElementById('cadastroForm');
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+
+            const nom_usuario = document.getElementById('nom_usuario').value;
+            const email = document.getElementById('email').value;
+            const sen_usuario = document.getElementById('senha').value;
+            const cpf_usuario = document.getElementById('cpf_usuario').value;
+            const rg_usuario = document.getElementById('rg_usuario').value;
+            const cep = document.getElementById('cep_usuario').value;
+            const cidade = document.getElementById('cidade_usuario').value;
+            const bairro = document.getElementById('bairro_usuario').value;
+            
+            const nom_razao_social = document.getElementById('nom_operadora').value;
+            const cnpj_operador = document.getElementById('cnpj').value;
+            
+            const desc_servico = document.getElementById('servico').value;
+            const nom_servico = document.getElementById('nom_servico').value;
+
+            const num_contrato = document.getElementById('num_contrato').value;
+            const ini_vigencia = document.getElementById('inicio').value;
+            const fim_vigencia = document.getElementById('fim').value;
+            const doc_contrato = document.getElementById('doc_img').value;
+
+            fetch('/cadastro/criar/uosc', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        nom_usuario,
+                        email,
+                        sen_usuario,
+                        cpf_usuario,
+                        rg_usuario,
+                        cep,
+                        cidade,
+                        bairro,
+                        nom_razao_social,
+                        cnpj_operador,
+                        desc_servico,
+                        nom_servico,
+                        num_contrato,
+                        ini_vigencia,
+                        fim_vigencia,
+                        doc_contrato
+                    })
+                })
+                .then(response => {
+                    if (response.ok) {
+                        return response.text();
+                    } else {
+                        throw new Error('Falha ao cadastrar');
+                    }
+                })
+                .then(data => {
+                    alert('Cadastro realizado com sucesso para o usuário: ' + data);
+                    // Redirecionar ou executar ações após o cadastro bem-sucedido
+                })
+                .catch(error => {
+                    alert('Erro ao fazer cadastro ' + error.message);
+                });
+        });
+    </script>
+</body>
+
+</html>

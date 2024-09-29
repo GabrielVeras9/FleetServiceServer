@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>FleetManagement</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <script src="../js/script.js"></script>
+    <link rel="icon" type="image/png" href="../img/img-logo.png">
+
+</head>
+
+<body>
+    <!-- Menu lateral -->
+    <div class="menu">
+        <main>
+            <img src="../img/logo-semFundo.png" style="align-self: center;" alt="Logo da empresa">
+        </main>
+        <br>
+        <a href="#" onclick="exibirMonitoracao()">
+            <i class="fas fa-chart-line"></i>
+            <span>Monitoração</span>
+        </a>
+        <a href="#" onclick="exibirConteudoPesquisa()">
+            <i class="fas fa-search"></i>
+            <span>Pesquisar Motorista</span>
+        </a>
+        
+        <a href="#" onclick="exibirConteudoCadastroFrota()">
+		    <i class="fas fa-truck"></i>
+		    <span>Cadastrar Frota</span>
+		</a>
+        <a href="#" onclick="exibirConteudoCadastroMotorista()">
+            <i class="fas fa-user-plus"></i>
+            <span>Cadastrar Motorista</span>
+        </a>
+        <a href="#" onclick="exibirConteudoCriarRotas()">
+            <i class="fas fa-route"></i>
+            <span>Criar Rotas</span>
+        </a>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <a href="#" onclick="exibirConteudoSobreNos()">
+            <i class="fas fa-folder"></i>
+            <span>Recursos</span>
+        </a>
+
+        <a href="#">
+            <i class="fas fa-cog"></i>
+            <span>Configurações</span>
+        </a>
+        <a href="#">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Sair</span>
+        </a>
+    </div>
+
+		<div id="conteudoCadastroFrota" style="display: none;">
+		    <form id="veiculoForm" enctype="multipart/form-data">
+		        <p>Atenção: Preencha de acordo com os dados do seu veiculo.</p>
+		        <p>Se você possuir mais de um veículo, será necessário cadastrar um por um. Caso haja muitos veículos, entre em contato conosco via email: fleet@fleetmanagement.com, e envie um anexo com os dados dos veículos juntamente com os documentos para serem homologados no sistema!!!</p>
+		
+		        <label for="tipo_veiculo">Tipo do Veículo:</label>
+		        <select id="tipo_veiculo" name="tipo_veiculo" required>
+		            <option value="" selected disabled>Selecione o tipo de veículo</option>
+		            <option value="A">Motocicleta</option>
+		            <option value="B">Veículo de passeio</option>
+		            <option value="C">Veículo de carga</option>
+		            <option value="D">Transporte de passageiros</option>
+		            <option value="E">Combinação de veículos</option>
+		        </select><br><br>
+		
+		        <label for="marca_veiculo">Marca:</label>
+		        <select id="marca_veiculo" name="marca_veiculo" required>
+		            <option value="" disabled selected>Selecione uma marca</option>
+		            <option value="Chevrolet">Chevrolet</option>
+		            <option value="Fiat">Fiat</option>
+		            <option value="Volkswagen">Ford</option>
+		            <option value="Volkswagen">Volkswagen</option>
+		            <option value="Volkswagen">Renault</option>
+		            <option value="Volkswagen">Nissan</option>
+		            <option value="Volkswagen">Toyota</option>
+		            <option value="Volkswagen">Hyundai</option>
+		        </select><br><br>
+		
+		        <label for="modelo_veiculo">Modelo:</label>
+		        <input type="text" id="modelo_veiculo" name="modelo_veiculo" required><br><br>
+		
+		        <label for="ano_fabricacao">Ano de Fabricação/Modelo:</label>
+		        <input type="text" id="ano_fabricacao" name="ano_fabricacao" required pattern="\d{4}/\d{4}" title="Formato válido: YYYY/YYYY" placeholder="Exemplo: 2019/2020"><br><br>
+		
+		        <label for="cor_veiculo">Cor do Veículo:</label>
+		        <input type="text" id="cor_veiculo" name="cor_veiculo" required style="text-transform: uppercase;"><br><br>
+		
+		        <label for="renavam">Renavam:</label>
+		        <input type="text" id="renavam" name="renavam" required pattern="[0-9]*" title="Apenas números são permitidos"><br><br>
+		
+		        <label for="num_placa">Número da Placa:</label>
+		        <input type="text" id="num_placa" name="num_placa" required style="text-transform: uppercase;"><br><br>
+		
+		        <label for="cep_veiculo">CEP:</label>
+		        <input type="text" id="cep_veiculo" name="cep_veiculo" required onchange="buscaCep('veiculo')" required pattern="[0-9]*" title="Apenas números são permitidos"><br><br>
+		
+		        <label for="cidade_veiculo">Cidade:</label>
+		        <input type="text" id="cidade_veiculo" name="cidade_veiculo" style="background-color: rgb(100, 100, 100); color: white;" required readonly><br><br>
+		
+		        <label for="bairro_veiculo">Bairro:</label>
+		        <input type="text" id="bairro_veiculo" name="bairro_veiculo" style="background-color: rgb(100, 100, 100); color: white;" required readonly><br><br>
+		
+		        <p>Anexa logo aqui abaixo o PDF ou a foto do CRLV (Certificado de Registro e Licenciamento do Veículo).</p>
+		        <label for="doc_veiculo">Documento:</label>
+		        <input type="file" id="doc_veiculo"><br><br>
+		
+		        <button type="submit">Cadastrar</button>
+		    </form>
+		</div>
+
+    <div class="conteudo">
+        <div class="conteudo">
+            <div id="conteudoMonitoracao"></div>
+            <div id="conteudoSobreNos"></div>
+            <div id="conteudoPesquisa"></div>
+            <div id="conteudoCadastroFrota"></div>
+            <div id="conteudoCadastroMotorista"></div>
+            <div id="conteudoCriarRotas"></div>
+        </div>
+        <div class="redes-sociais">
+            <a href="https://www.linkedin.com/seu_perfil" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://www.facebook.com/seu_perfil" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://www.instagram.com/seu_perfil" target="_blank"><i class="fab fa-instagram"></i></a>
+        </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+        <script src="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.js"></script>
+
+        <script>
+            function exibirMonitoracao() {
+                ocultarConteudos('conteudoMonitoracao');
+                const conteudo = `
+                    <div id="mapid"></div>
+                `;
+                document.getElementById('conteudoMonitoracao').innerHTML = conteudo;
+                var map = L.map('mapid').setView([-15.79166991995177, -47.88958339213277], 10);
+
+                // Adicionando um mapa base (OpenStreetMap, por exemplo)
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '© OpenStreetMap contributors'
+                }).addTo(map);
+
+                // URL do seu GeoServer que fornece o WMS
+                //var wmsUrl = 'https://geoserver.semob.df.gov.br/geoserver/semob/wms?service=WMS';
+
+                // Nome da camada no GeoServer
+                var wmsLayerName = 'semob:Linhas de onibus';
+
+                // Criando uma camada WMS
+                var wmsLayer = L.tileLayer.wms(wmsUrl, {
+                    layers: wmsLayerName,
+                    format: 'image/png',
+                    transparent: true
+                }).addTo(map);
+
+            }
+            exibirMonitoracao();
+        </script>
+</body>
+
+</html>

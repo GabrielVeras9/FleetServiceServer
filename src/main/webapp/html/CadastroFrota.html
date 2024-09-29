@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de frotas</title>
+    <script src="../js/frotas.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js"></script>
+</head>
+
+<body>
+    <h3>Quais são as suas frotas?</h3>
+    <h3>Cadastre agora mesmo, aqui abaixo: </h3>
+    <form id="veiculoForm" enctype="multipart/form-data">
+        <p>Atenção: Preencha de acordo com os dados do seu veiculo.</p>
+        <p>Se voce possuir mais de um veiculo, sera necessario cadastrar um por um, caso haja muitos veiculos, entre em contato conosco via email: fleet@fleetmanagement.com, e envie um anexo com os dados dos veiculos juntamente com os documentos para serem
+            homologados no sistema!!!</p>
+
+        <label for="tipo_veiculo">Tipo do Veículo:</label>
+        <select id="tipo_veiculo" name="tipo_veiculo" required>
+            <option value="" selected disabled>Selecione o tipo de veículo</option>
+            <option value="A">Motocicleta</option>
+            <option value="B">Veículo de passeio</option>
+            <option value="C">Veículo de carga</option>
+            <option value="D">Transporte de passageiros</option>
+            <option value="E">Combinação de veículos</option>
+        </select><br><br>
+
+        <label for="marca_veiculo">Marca:</label>
+        <select id="marca_veiculo" name="marca_veiculo" required>
+            <option value="" disabled selected>Selecione uma marca</option>
+            <option value="Chevrolet">Chevrolet</option>
+            <option value="Fiat">Fiat</option>
+            <option value="Volkswagen">Ford</option>
+            <option value="Volkswagen">Volkswagen</option>
+            <option value="Volkswagen">Renault</option>
+            <option value="Volkswagen">Nissan</option>
+            <option value="Volkswagen">Toyota</option>
+            <option value="Volkswagen">Hyundai</option>
+        </select><br><br>
+
+        <label for="modelo_veiculo">Modelo:</label>
+        <input type="text" id="modelo_veiculo" name="modelo_veiculo" required><br><br>
+
+        <label for="ano_fabricacao">Ano de Fabricação/Modelo:</label>
+        <input type="text" id="ano_fabricacao" name="ano_fabricacao" required pattern="\d{4}/\d{4}" title="Formato válido: YYYY/YYYY" placeholder="Exemplo: 2019/2020"><br><br>
+
+        <label for="cor_veiculo">Cor do Veiculo:</label>
+        <input type="text" id="cor_veiculo" name="cor_veiculo" required style="text-transform: uppercase;"><br><br>
+
+        <label for="renavam">Renavam:</label>
+        <input type="text" id="renavam" name="renavam" required pattern="[0-9]*" title="Apenas números são permitidos"><br><br>
+
+        <label for="num_placa">Número da Placa:</label>
+        <input type="text" id="num_placa" name="num_placa" required style="text-transform: uppercase;"><br><br>
+
+        <label for="cep_veiculo">CEP:</label>
+        <input type="text" id="cep_veiculo" name="cep_veiculo" required onchange="buscaCep('veiculo')" required pattern="[0-9]*" title="Apenas números são permitidos"><br><br>
+
+        <label for="cidade_veiculo">Cidade:</label>
+        <input type="text" id="cidade_veiculo" name="cidade_veiculo" style="background-color: rgb(100, 100, 100); color: white;" required readonly><br><br>
+
+
+        <label for="bairro_veiculo">Bairro:</label>
+        <input type="text" id="bairro_veiculo" name="bairro_veiculo" style="background-color: rgb(100, 100, 100); color: white;" required readonly><br><br>
+
+        <p>Anexa logo aqui abaixo o PDF ou a foto do CRLV (CERTIFICADO DE REGISTRO E LICENCIAMENTO DO VEICULO).</p>
+        <label for="doc_veiculo">Documento:</label>
+        <input type="file" id="doc_veiculo"><br><br>
+
+        <!--<label for="ativo">Deseja ativar o veiculo? </label>
+        <input type="checkbox" id="veiculo_ativo" name="ativo" checked><br><br>-->
+
+        <button type="submit">Cadastrar</button>
+    </form>
+    <script>//Padrão de placa Brasileria
+        $(document).ready(function() {
+            $('#num_placa').inputmask('AAA-9A99', {
+                "placeholder": ""
+            });
+        });
+
+        //Padrão de renavem Brasileria
+        $(document).ready(function() {
+            $('#renavam').inputmask('99999999999', {
+                "placeholder": ""
+            });
+        });
+
+        //Padrão de renavem Brasileria
+        $(document).ready(function() {
+            $('#ano_fabricacao').inputmask('9999/9999', {
+                "placeholder": ""
+            });
+        });
+    </script>
+</body>
+
+</html>

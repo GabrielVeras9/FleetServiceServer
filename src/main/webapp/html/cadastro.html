@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Motorista por Veículos</title>
+    <script src="../js/cadastro.js"></script>
+    <link rel="stylesheet" href="../css/motorista.css" />
+     <!--<script src="../css/cadastro.css"></script>-->
+     <style>
+		 #cadastroForm > div:not(:first-child) {
+   	 	 display: none;
+	}
+
+	 </style>
+</head>
+
+<body>
+    <form id="cadastroForm" enctype="multipart/form-data">
+       <h3>Preencha apenas com os dados do seu motoristas: </h3>
+        <h3>Atenção: Fale com o seu motorista, para que o mesmo passe todas as informação atualizado sobre os seus dados pessoais para o cadastro.</h3>
+        <label for="nome_motorista">Nome:</label>
+        <input type="text" id="nome_motorista" name="nome_motorista" required pattern="[A-Za-zÀ-ú ]*" title="Apenas letras são permitidas"><br><br>
+        
+        <label for="email_motorista">Email:</label>
+        <input type="text" id="email_motorista" name="email_motorista" required><br><br>
+        
+        <label for="cpf_motorista">CPF:</label>
+        <input type="text" id="cpf_motorista" name="cpf_motorista" required pattern="[0-9]*" title="Apenas números são permitidos"><br><br>
+        <label for="rg_motorista">RG:</label>
+        <input type="text" id="rg_motorista" name="rg_motorista" required pattern="[0-9]*" title="Apenas números são permitidos"><br><br>
+        <label for="tipo_cnh_motorista">Tipo da CNH:</label>
+    <select id="tipo_cnh_motorista" name="tipo_cnh_motorista" required>
+        <option value="" selected disabled>Selecione o tipo de CNH</option>
+        <option value="A">A - Motocicleta</option>
+        <option value="B">B - Veículo de passeio</option>
+        <option value="C">C - Veículo de carga</option>
+        <option value="D">D - Transporte de passageiros</option>
+        <option value="E">E - Combinação de veículos</option>
+    </select><br><br>
+        <label for="cnh_motorista">CNH:</label>
+        <input type="text" id="cnh_motorista" name="cnh_motorista" required pattern="[0-9]*" title="Apenas números são permitidos"><br><br>
+        <!-- Endereço do Motorista -->
+        <label for="cep_motorista">CEP:</label>
+        <input type="text" id="cep_motorista" name="cep_motorista" required onchange="buscaCep('motorista')" required pattern="[0-9]*" title="Apenas números são permitidos"><br><br>
+        <label for="cidade_motorista">Cidade:</label>
+        <input type="text" id="cidade_motorista" name="cidade_motorista" style="width: 150px; background-color: rgb(100, 100, 100); color: white;" required readonly><br><br>
+        <label for="bairro_motorista">Bairro:</label>
+        <input type="text" id="bairro_motorista" name="bairro_motorista" style="width: 150px; background-color: rgb(100, 100, 100); color: white;" required readonly><br><br>
+        <!-- Documento do Motorista -->
+        
+        <p>Selecione o periodo em que o motorista ira fazer essa rota</p>
+        <label for="inicio_rota">Início da Rota:</label>
+		<input type="datetime-local" id="inicio_rota" name="inicio_rota" required><br><br>
+		
+		<label for="fim_rota">Fim da Rota:</label>
+		<input type="datetime-local" id="fim_rota" name="fim_rota" required><br><br>
+		
+		<!--<label for="hora_prevista">Hora Prevista:</label>
+		<input type="time" id="hora_prevista" name="hora_prevista" required><br><br>-->
+		
+        <label for="doc_img_motorista">Documento:</label>
+        <input type="file" id="doc_img_motorista"><br><br>
+		
+        <p>ATENÇÃO: Aqui esta disponiveis apenas os veiculo que voce marcou como ATIVOS</p>
+        <h3>Pesquise o veiculo cadastrado pela placa:</h3>
+        <label for="num_placa">Número da Placa:</label>
+		<input id="num_placa" name="num_placa" style="width: 150px;" required onchange="buscaModeloVeiculo()"><br><br>
+		
+		<label for="marca_veiculo">Marca:</label>
+		<input id="marca_veiculo" name="marca_veiculo" style="width: 150px; background-color: rgb(100, 100, 100); color: white;" required readonly><br><br>
+		
+		<label for="modelo_veiculo">Modelo:</label>
+		<input id="modelo_veiculo" name="modelo_veiculo" style="width: 150px; background-color: rgb(100, 100, 100); color: white;" required readonly><br><br>
+		
+		<label for="ano_fabricacao">Ano de Fabricação:</label>
+		<input id="ano_fabricacao" name="ano_fabricacao" style="width: 150px; background-color: rgb(100, 100, 100); color: white;" required readonly><br><br>
+		
+		<label for="cor_veiculo">Cor do Veiculo:</label>
+		<input id="cor_veiculo" name="cor_veiculo" style="width: 150px; background-color: rgb(100, 100, 100); color: white;" required readonly><br><br>
+
+    
+    
+	<p>Apos finalizar o cadastro, sera encaminhado para o email do motorista a suas credenciais (Email e Senha) para acessar o aplicativo da FleetApp.</p>
+
+    <button type="submit">Cadastrar</button>
+      <!--</div>-->
+    </form>
+</body>
+	<script>
+		
+		
+	</script>
+	
+</html>
