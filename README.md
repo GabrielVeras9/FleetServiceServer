@@ -1,0 +1,5 @@
+O Gerenciamento de Frota é uma aplicação totalmente autoral criada e idealizada por mim. Escolhi a linguagem Java (versão 17) para o gerenciamento de frotas em tempo real. A aplicação utiliza a biblioteca SMTP do Gmail para enviar e-mails e se conecta a um banco de dados PostgreSQL, projetado para operar com a arquitetura REST. Com funcionalidades que permitem o compartilhamento de dados em tempo real, os gestores podem acessar informações atualizadas sobre a frota diretamente na interface de gerenciamento.
+
+Além disso, a aplicação incorpora medidas de segurança com criptografia de senhas, utilizando a biblioteca JJWT, garantindo a proteção dos dados dos usuários. Este projeto oferece uma solução completa para o gerenciamento eficiente de frotas, facilitando análises e tomadas de decisão com base em dados precisos e em tempo real.
+
+O projeto foi apresentado na Expo Transamerica Center, em São Paulo, no evento que ocorre a cada dois anos, promovido pela ANTP (Agência Nacional de Transporte Público), no dia 25/10/2023. Todas as informações sobre o artigo, certificado e outros documentos podem ser verificadas no repositório chamado "Description=for-fleet".
