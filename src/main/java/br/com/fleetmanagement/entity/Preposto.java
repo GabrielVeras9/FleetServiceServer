@@ -10,11 +10,11 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "tab_preposto")//, schema = "fleet_homol")
 public class Preposto {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idpreposto;
-	
+
 	@Column(name = "email_motorista")
 	private String  emailMotorista;
 	private String senha_motorista;
@@ -27,7 +27,7 @@ public class Preposto {
 	private String cep;
 	private String cidade;
 	private String bairro;
-	
+
 	public Preposto() {
 	}
 
@@ -118,7 +118,7 @@ public class Preposto {
 	public void setDoc_img(String doc_img) {
 		this.doc_img = doc_img;
 	}
-	
+
 	public String getCep() {
 		return cep;
 	}
@@ -126,7 +126,7 @@ public class Preposto {
 	public void setCep(String cep) {
 		this.cep = cep;
 	}
-	
+
 	public String getCidade() {
 		return cidade;
 	}
@@ -134,7 +134,7 @@ public class Preposto {
 	public void setCidade(String cidade) {
 		this.cidade = cidade;
 	}
-	
+
 	public String getBairro() {
 		return bairro;
 	}

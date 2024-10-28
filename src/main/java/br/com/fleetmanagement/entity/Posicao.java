@@ -12,27 +12,27 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "tab_posicao")//, schema = "fleet_homol")
 public class Posicao {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idtab_posicao;
-	
+
 	@Column(name = "nome_motorista")
 	private String nomeMotorista;
-	
+
 	@Column(name = "cpf_motorista")
 	private String cpfMotorista;
 	private String placaveiculo;
 	private Time hr_prevista;
 	private String latitude;
 	private String longitude;
-	
+
 	public Posicao() {
 	}
 
 	public Posicao(Long idtab_posicao, String nomeMotorista, String cpfMotorista, String placaveiculo, Time hr_prevista,
 			String latitude,String longitude) {
-		
+
 		this.idtab_posicao = idtab_posicao;
 		this.nomeMotorista = nomeMotorista;
 		this.cpfMotorista = cpfMotorista;
@@ -89,7 +89,7 @@ public class Posicao {
 	public void setLatitude(String latitude) {
 		this.latitude = latitude;
 	}
-	
+
 	public String getLongitude() {
 		return longitude;
 	}

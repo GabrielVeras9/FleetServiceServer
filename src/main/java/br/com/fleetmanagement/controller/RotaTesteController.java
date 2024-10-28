@@ -1,8 +1,8 @@
 package br.com.fleetmanagement.controller;
 
 import java.util.List;
-import java.util.Map;
 
+import org.hibernate.mapping.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +18,7 @@ import br.com.fleetmanagement.service.RotaTesteService;
 @RestController
 @RequestMapping("/api/rota")
 public class RotaTesteController {
-	
+
 	@GetMapping
 	public List<RotaTesteDTO> findAll(){
 		List<RotaTesteDTO> result = rotaTesteService.findAll();
@@ -27,7 +27,7 @@ public class RotaTesteController {
 
     @Autowired
     private RotaTesteService rotaTesteService;
-    
+
     @GetMapping("/geojson")
     public ResponseEntity<String> obterRotaGeoJSON() {
         String rotaGeoJSON = rotaTesteService.obterRotaGeoJSON(); // Chama o serviço para obter o JSON da rota
@@ -40,7 +40,7 @@ public class RotaTesteController {
     }
 
     @PostMapping("/salvar")
-    public ResponseEntity<String> salvarRota(@RequestBody List<Map<String, Double>> routeData) {
+    public ResponseEntity<String> salvarRota(@RequestBody List<java.util.Map<String, Double>> routeData) {
         try {
             rotaTesteService.salvarRota(routeData);
             return new ResponseEntity<>("Rota salva com sucesso!", HttpStatus.OK);

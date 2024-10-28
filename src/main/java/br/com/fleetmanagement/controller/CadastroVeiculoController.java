@@ -22,13 +22,13 @@ public class CadastroVeiculoController {
 
 	@Autowired
     private CadastroVeiculoService cadastroVeiculoService;
-	
+
 	@GetMapping
 	public List<VeiculoDTO> findAll(){
 		List<VeiculoDTO> result = cadastroVeiculoService.findAll();
 		return result;
 	}
-	
+
 	@GetMapping(value = "/{num_placa}")
     public List<VeiculoDTO> findByNum(@PathVariable String num_placa) {
         List<VeiculoDTO> result = cadastroVeiculoService.findByNum(num_placa);
@@ -39,7 +39,7 @@ public class CadastroVeiculoController {
 	    public ResponseEntity<String> cadastrarFrota(
 	            @RequestPart("dto") VeiculoDTO dto,
 	            @RequestPart("file") MultipartFile file) {
-		  
+
 		  cadastroVeiculoService.cadastrarFrota(dto, file);
 	        return new ResponseEntity<>("Cadastro realizado com sucesso", HttpStatus.CREATED);
 	    }

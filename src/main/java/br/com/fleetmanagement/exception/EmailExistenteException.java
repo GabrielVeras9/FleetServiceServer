@@ -5,9 +5,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(HttpStatus.UNAUTHORIZED)
 public class EmailExistenteException extends RuntimeException{
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	public EmailExistenteException(String message) {
         super(message);
     }

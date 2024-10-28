@@ -4,7 +4,7 @@ import br.com.fleetmanagement.entity.Usuario;
 import br.com.fleetmanagement.enuns.UsuarioEnuns;
 
 public class UsuarioMinDTO {
-	
+
 	private Long idusuario;
 	private String nom_usuario;
 	private String sen_usuario;
@@ -15,22 +15,22 @@ public class UsuarioMinDTO {
 	private String cidade;
 	private String bairro;
 	private UsuarioEnuns Role;
-	
+
 	public UsuarioMinDTO() {
 	}
 
 	public UsuarioMinDTO(Usuario entity) {
-		idusuario = entity.getIdusuarioLong();
+		idusuario = entity.getIdusuario();
 		nom_usuario = entity.getNom_usuario();
 		sen_usuario = entity.getSen_usuario();
-		email = entity.getemail();
+		email = entity.getEmail();
 		cpf_usuario = entity.getCpf_usuario();
 		rg_usuario = entity.getRg_usuario();
 		cep = entity.getCep();
 		cidade = entity.getCidade();
 		bairro = entity.getBairro();
 		Role = entity.getRole();
-		
+
 	}
 
 	public Long getIdUsuario() {
@@ -40,7 +40,7 @@ public class UsuarioMinDTO {
 	public String getNom_usuario() {
 		return nom_usuario;
 	}
-	
+
 	public String getSen_usuario() {
 		return sen_usuario;
 	}
@@ -53,7 +53,7 @@ public class UsuarioMinDTO {
 	public String getCpf_usuario() {
 		return cpf_usuario;
 	}
-	
+
 	public String getRg_usuario() {
 		return rg_usuario;
 	}
@@ -89,7 +89,7 @@ public class UsuarioMinDTO {
 	public void setRole(UsuarioEnuns role) {
 		Role = role;
 	}
-	
-	
+
+
 }
 

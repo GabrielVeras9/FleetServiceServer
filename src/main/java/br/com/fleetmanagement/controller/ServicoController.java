@@ -16,10 +16,10 @@ public class ServicoController {
 
 	@Autowired
 	private ServicoService servicoService;
-	
+
 	@GetMapping
 	public List<ServicoDTO> finAll(){
 		List<ServicoDTO> result = servicoService.findAll();
-		return result; 
+		return result;
 	}
 }

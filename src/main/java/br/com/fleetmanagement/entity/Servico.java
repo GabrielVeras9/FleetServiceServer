@@ -9,13 +9,13 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "tab_servico")//, schema = "fleet_homol" )
 public class Servico {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idservico;
 	private String desc_servico;
 	private String nom_servico;
-	
+
 	public Servico() {
 	}
 	public Servico(Long idservico, String desc_servico, String nom_servico) {
@@ -41,5 +41,5 @@ public class Servico {
 	public void setNom_servico(String nom_servico) {
 		this.nom_servico = nom_servico;
 	}
-	
+
 }

@@ -26,15 +26,15 @@ public class CadastroService {
 
     @Autowired
     private PrepostoRepository prepostoRepository;
-    
+
     @Autowired
     private GoogleDriveService googleDriveService;
-    
+
     @Autowired
     private JavaMailSender emailSender;
-    
+
     private static final Logger logger = (Logger) LoggerFactory.getLogger(CadastroService.class);
-    
+
     //Salva os arquivos de imagem no google drive//
     public String uploadFileToDrive(MultipartFile file) {
         try {
@@ -46,7 +46,7 @@ public class CadastroService {
             return null;
         }
     }
-    
+
     //gerador de senha aleatoria//
     private String gerarSenhaAleatoria() {
         String caracteres = "1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*";
@@ -60,7 +60,7 @@ public class CadastroService {
 
         return senha_motorista.toString();
     }
-    
+
     //Função para encaminhar o email assim que o login pro realizado com sucesso//
     private void enviarEmailBoasVindas(String email, String nomeMotorista, String senha_Motorista) {
         MimeMessage message = emailSender.createMimeMessage();
@@ -69,7 +69,7 @@ public class CadastroService {
         try {
             helper.setTo(email);
             helper.setSubject("Bem-vindo à FleetApp Motorista - Seu Acesso ao Aplicativo");
-        
+
         String bodyEmail = "<html><body>" +
                     "<p>Caro " + nomeMotorista + ",</p>" +
                     "<p>É um prazer tê-lo(a) como parte da equipe da FleetManagement!</p>" +
@@ -99,7 +99,7 @@ public class CadastroService {
 	        logger.error("Outro erro ao enviar e-mail de confirmação de cadastro para: {}", email, e);
 	    }
 	}
-    
+
     public void cadastrarVeiculoEPreposto(MotoAndVeiDTO dto, MultipartFile file) {
         Preposto preposto = new Preposto();
         preposto.setEmailMotorista(dto.getEmailMotorista());
@@ -113,7 +113,7 @@ public class CadastroService {
         preposto.setCep(dto.getCep());
         preposto.setCidade(dto.getCidade());
         preposto.setBairro(dto.getBairro());
-        
+
         VeiPorMotorista veiPorMotorista = new VeiPorMotorista();
         veiPorMotorista.setMarca(dto.getMarca());
         veiPorMotorista.setModelo(dto.getModelo());
@@ -123,15 +123,15 @@ public class CadastroService {
         veiPorMotorista.setInicio_rota(dto.getInicio_rota());
         veiPorMotorista.setFim_rota(dto.getFim_rota());
         veiPorMotoristaRepository.save(veiPorMotorista);
-        
-        
+
+
         try {
             String linkGoogleDrive = googleDriveService.uploadFileToDrive(file);
             preposto.setDoc_img(linkGoogleDrive);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
         prepostoRepository.save(preposto);
         enviarEmailBoasVindas(dto.getEmailMotorista(), dto.getNome_motorista(), dto.getSenha_motorista());
     }

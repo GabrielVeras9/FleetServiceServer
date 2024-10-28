@@ -14,13 +14,13 @@ import br.com.fleetmanagement.repository.VeiculoRepository;
 
 @Service
 public class CadastroVeiculoService {
-	
+
 	@Autowired
     private VeiculoRepository veiculoRepository;
 
     @Autowired
     private GoogleDriveService googleDriveService;
-    
+
     public String uploadFileToDrive(MultipartFile file) {
         try {
 
@@ -31,19 +31,19 @@ public class CadastroVeiculoService {
             return null;
         }
     }
-    
+
     @Transactional(readOnly = true)
 	public List<VeiculoDTO> findAll(){
 		List<Veiculo> result = veiculoRepository.findAll();
 		return result.stream().map(x -> new VeiculoDTO(x)).toList();
 
 	}
-    
+
     public List<VeiculoDTO> findByNum(String num_placa){
 		List<VeiculoProjection> result = veiculoRepository.searchByNum(num_placa);
 		return result.stream().map(x -> new VeiculoDTO(x)).toList();
 	}
-    
+
     public void cadastrarFrota(VeiculoDTO dto, MultipartFile file) {
         Veiculo veiculo = new Veiculo();
         veiculo.setModelo(dto.getModelo());
@@ -55,14 +55,14 @@ public class CadastroVeiculoService {
         veiculo.setCepVei(dto.getCepvei());
         veiculo.setCidadeVei(dto.getCidadevei());
         veiculo.setBairroVei(dto.getBairrovei());
-        
+
         try {
             String linkGoogleDrive = googleDriveService.uploadFileToDrive(file);
             veiculo.setDoc_veiculo(linkGoogleDrive);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
         veiculo.setCor_veiculo(dto.getCor_veiculo());
         veiculoRepository.save(veiculo);
     }

@@ -14,7 +14,7 @@ import br.com.fleetmanagement.service.UoscService;
 @RestController
 @RequestMapping("/cadastro")
 public class UoscController {
-	
+
 	@Autowired
     private UoscService uoscService;
 

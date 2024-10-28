@@ -18,30 +18,30 @@ public class PrepostoService {
 
 	@Autowired
 	private PrepostoRepository prepostoRepository;
-	
+
 	public List<PrepostoDTO> findAll(){
 		List<Preposto> result = prepostoRepository.findAll();
 		return result.stream().map(x -> new PrepostoDTO(x)).toList();
 	}
-	
+
 	public List<PrepostoDTO> findByNom(String nome_motorista){
 		List<PrepostoProjection> result = prepostoRepository.searchByNom(nome_motorista);
 		return result.stream().map(x -> new PrepostoDTO(x)).toList();
 	}
-	
+
 	public List<PrepostoDTO> findByCpf(String cpf_motorista){
 		List<PrepostoProjection> result = prepostoRepository.searchByCpf(cpf_motorista);
 		return result.stream().map(x -> new PrepostoDTO(x)).toList();
 	}
-	
+
 	@Transactional(readOnly = true)
 	public Preposto autenticar(String emailMotorista, String senha_motorista) {
 		Preposto preposto = prepostoRepository.findByEmailMotorista(emailMotorista);
-        
+
         if (preposto == null) {
             throw new UsuarioNaoEncontradoException();
         }
-        
+
         if (!preposto.getSenha_motorista().equals(senha_motorista)) {
             throw new SenhaIncorretaException();
         }

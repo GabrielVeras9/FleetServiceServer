@@ -4,7 +4,7 @@ import br.com.fleetmanagement.entity.Preposto;
 import br.com.fleetmanagement.projection.PrepostoProjection;
 
 public class PrepostoDTO {
-	
+
 	//private Long idpreposto;
 	private String nome_motorista;
 	private String emailMotorista;
@@ -17,7 +17,7 @@ public class PrepostoDTO {
 	private String cidade;
 	private String bairro;
 	private String doc_img;
-	
+
 	public PrepostoDTO() {
 	}
 
@@ -29,13 +29,13 @@ public class PrepostoDTO {
 		cpf_motorista = Entity.getCpf_motorista();
 		rg_motorista = Entity.getRg_motorista();
 		cnh_motorista = Entity.getCnh_motorista();
-		tipo_cnh = Entity.getTipo_cnh();		
+		tipo_cnh = Entity.getTipo_cnh();
 		doc_img = Entity.getDoc_img();
 		cep = Entity.getCep();
 		cidade = Entity.getCidade();
 		bairro = Entity.getCidade();
 	}
-	
+
 	public PrepostoDTO(PrepostoProjection Projection) {
 		//idpreposto = Projection.getIdPreposto();
 		emailMotorista = Projection.getEmailMotorista();

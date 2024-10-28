@@ -11,7 +11,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "tab_contrato")//, schema = "fleet_homol" )
 public class Contrato {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idtab_contrato;
@@ -19,13 +19,13 @@ public class Contrato {
 	private Date ini_vigencia;
 	private Date fim_vigencia;
 	private String doc_contrato;
-	
+
 	public Contrato() {
 	}
 
 	public Contrato(Long idtab_contrato, Integer num_contrato, Date ini_vigencia, Date fim_vigencia,
 			String doc_contrato) {
-		
+
 		this.idtab_contrato = idtab_contrato;
 		this.num_contrato = num_contrato;
 		this.ini_vigencia = ini_vigencia;
@@ -72,5 +72,5 @@ public class Contrato {
 	public void setDoc_contrato(String doc_contrato) {
 		this.doc_contrato = doc_contrato;
 	}
-	
+
 }

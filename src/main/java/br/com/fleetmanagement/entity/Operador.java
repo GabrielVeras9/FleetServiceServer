@@ -9,18 +9,18 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "tab_operador")//, schema = "fleet_homol" )
 public class Operador {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idtab_operador;
 	private String nom_razao_social;
 	private String cnpj_operador;
-	
+
 	public Operador() {
 	}
 
 	public Operador(Long idtab_operador, String nom_razao_social, String cnpj_operador) {
-		
+
 		this.idtab_operador = idtab_operador;
 		this.nom_razao_social = nom_razao_social;
 		this.cnpj_operador = cnpj_operador;

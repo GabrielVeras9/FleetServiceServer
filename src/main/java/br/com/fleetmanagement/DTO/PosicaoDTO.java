@@ -6,7 +6,7 @@ import br.com.fleetmanagement.entity.Posicao;
 import br.com.fleetmanagement.projection.PosicaoPrejection;
 
 public class PosicaoDTO {
-	
+
 	private Long idtab_posicao;
 	private String nomeMotorista;
 	private String cpfMotorista;
@@ -14,7 +14,7 @@ public class PosicaoDTO {
 	private Time hr_prevista;
 	private String latitude;
 	private String longitude;
-	
+
 	public PosicaoDTO() {
 	}
 
@@ -27,7 +27,7 @@ public class PosicaoDTO {
 		latitude = entity.getLatitude();
 		longitude = entity.getLongitude();
 	}
-	
+
 	public PosicaoDTO(PosicaoPrejection Projection) {
 		nomeMotorista = Projection.getNome_Motorista();
 		cpfMotorista = Projection.getCpf_Motorista();
@@ -60,7 +60,7 @@ public class PosicaoDTO {
 	public String getLatitude() {
 		return latitude;
 	}
-	
+
 	public String getLongitude() {
 		return longitude;
 	}

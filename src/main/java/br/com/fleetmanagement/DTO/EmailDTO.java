@@ -1,11 +1,11 @@
 package br.com.fleetmanagement.DTO;
 
 public class EmailDTO {
-	
+
 	 private String to;
 	 private String subject;
 	 private String text;
-	 
+
 	public String getTo() {
 		return to;
 	}

@@ -15,7 +15,7 @@ public class OperadorService {
 
 	@Autowired
 	private OperadorRepository operadorRepository;
-	
+
 	public List<OperadorDTO> findAll(){
 		List<Operador> result = operadorRepository.findAll();
 		return result.stream().map(x -> new OperadorDTO(x)).toList();

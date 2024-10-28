@@ -16,23 +16,23 @@ import br.com.fleetmanagement.repository.UsuarioRepository;
 
 @Service
 public class UsuarioService implements UserDetailsService{
-	
+
 	@Autowired
 	private UsuarioRepository usuarioRepository;
-	
+
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		// TODO Auto-generated method stub
 		return usuarioRepository.findByEmail(username);
 	}
-	
+
 	@Transactional(readOnly = true)
 	public List<UsuarioMinDTO> findAll(){
 		List<Usuario> result = usuarioRepository.findAll();
 		return result.stream().map(x -> new UsuarioMinDTO(x)).toList();
 
 	}
-	
+
 /*
 	@Transactional(readOnly = true)
 		public UsuarioMinDTO findByEmail(String email) {
@@ -52,7 +52,7 @@ public class UsuarioService implements UserDetailsService{
 	    if (!userDetails.getPassword().equals(sen_usuario)) {
 	        throw new SenhaIncorretaException();
 	    }
-	    
+
 	    return userDetails;
 	}
 }

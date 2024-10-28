@@ -14,13 +14,13 @@ public class VeiPorMotoristaDTO {
 	private String fabricacao;
 	private Timestamp inicio_rota;
 	private Timestamp fim_rota;
-	
-	
-	public VeiPorMotoristaDTO() {	
+
+
+	public VeiPorMotoristaDTO() {
 	}
-	
+
 	public VeiPorMotoristaDTO(VeiPorMotorista Entity) {
-		
+
 		idtab_veiPorMotorista = Entity.getIdtab_veiPorMotorista();
 		marca = Entity.getMarca();
 		modelo = Entity.getNum_placa();

@@ -16,21 +16,21 @@ import br.com.fleetmanagement.entity.Usuario;
 
 @Service
 public class TokenService {
-    
+
     @Value("${api.security.token.secret}")
     private String secret;
-    
+
     private Instant genExpirationDate() {
         return LocalDateTime.now().plusHours(2).toInstant(ZoneOffset.of("-03:00"));
     }
-    
+
     public String generateToken(Usuario usuario) {
         try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
             System.out.println("Valor do TokenService - generateToken - secret: " + secret);
             String token = JWT.create()
                     .withIssuer("auth-api")
-                    .withSubject(usuario.getemail())
+                    .withSubject(usuario.getEmail())
                     .withExpiresAt(genExpirationDate())
                     .sign(algorithm);
             //System.out.println("Token gerado para o usuário " + usuario.getemail() + " com a role: " + usuario.getRole() + ": " + token);
@@ -39,7 +39,7 @@ public class TokenService {
             throw new RuntimeException("Erro para gerar o Token", exception);
         }
     }
-    
+
     public String validateToken(String token) {
         try {
             Algorithm algorithm = Algorithm.HMAC256(secret);

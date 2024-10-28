@@ -12,15 +12,15 @@ import br.com.fleetmanagement.repository.PosicaoRepository;
 
 @Service
 public class PosicaoService {
-	
+
 	@Autowired
 	private PosicaoRepository posicaoRepository;
-	
+
 	public List<PosicaoDTO> findAll(){
 		List<Posicao> result = posicaoRepository.findAll();
 		return result.stream().map(x -> new PosicaoDTO(x)).toList();
 	}
-	
+
 	public List<PosicaoDTO> findByPlaca(String placaveiculo){
 		List<PosicaoPrejection> result = posicaoRepository.searchByPlaca(placaveiculo);
 		return result.stream().map(x -> new PosicaoDTO(x)).toList();

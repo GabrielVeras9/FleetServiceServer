@@ -3,13 +3,13 @@ package br.com.fleetmanagement.DTO;
 import br.com.fleetmanagement.entity.RotaTeste;
 
 public class RotaTesteDTO {
-	
+
 	private Long id;
 	private Double latitude;
 	private Double longitude;
 	private Double extensao;
 	private Double tempo_medio;
-	
+
 	public RotaTesteDTO() {
 	}
 

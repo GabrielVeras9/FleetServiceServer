@@ -1,8 +1,8 @@
 package br.com.fleetmanagement.service;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.ByteArrayOutputStream;
 import java.util.Collections;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,10 +26,12 @@ public class GoogleDriveService {
     public String uploadFileToDrive(MultipartFile file) {
         try {
             if (!file.isEmpty()) {
+                // Criando o arquivo no Google Drive
                 com.google.api.services.drive.model.File driveFile = new File();
                 driveFile.setName(file.getOriginalFilename());
                 driveFile.setParents(Collections.singletonList(FOLDER_ID));
 
+                // Lendo o conteúdo do arquivo
                 InputStream inputStream = file.getInputStream();
                 ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
                 byte[] buffer = new byte[4096];
@@ -39,17 +41,19 @@ public class GoogleDriveService {
                 }
                 byte[] fileContent = outputStream.toByteArray();
 
+                // Fazendo o upload para o Google Drive
                 driveFile = googleDriveService.files().create(driveFile, new ByteArrayContent(file.getContentType(), fileContent))
                         .setFields("id")
                         .execute();
 
                 String fileId = driveFile.getId();
-                
-                Preposto preposto = new Preposto();
                 String linkDaImagem = "https://drive.google.com/uc?id=" + fileId;
+
+                // Se necessário, associe o link ao Preposto
+                Preposto preposto = new Preposto();
                 preposto.setDoc_img(linkDaImagem);
 
-                return "https://drive.google.com/uc?id="+fileId;
+                return linkDaImagem;
             } else {
                 return "Por favor, selecione um arquivo para upload.";
             }
@@ -59,52 +63,3 @@ public class GoogleDriveService {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

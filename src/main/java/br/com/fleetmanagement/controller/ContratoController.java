@@ -14,16 +14,16 @@ import br.com.fleetmanagement.service.ContratoService;
 @RestController
 @RequestMapping(value = "/contrato")
 public class ContratoController {
-	
+
 	@Autowired
 	private ContratoService contratoService;
-	
+
 	@GetMapping
 	public List<ContratoDTO> finAll(){
 		List<ContratoDTO> result = contratoService.findAll();
-		return result; 
+		return result;
 	}
-	
+
 	@GetMapping(value = "/{num_Contrato}")
 	public List<ContratoDTO> findByList(@PathVariable String num_Contrato){
 		List<ContratoDTO> result = contratoService.findByNumContrato(num_Contrato);

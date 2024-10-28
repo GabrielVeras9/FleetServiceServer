@@ -11,7 +11,7 @@ import jakarta.persistence.Table;
 	@Entity
 	@Table(name = "tab_veiculoPor_Motorista")//, schema = "fleet_homol")
 	public class VeiPorMotorista {
-		
+
 		@Id
 		@GeneratedValue(strategy = GenerationType.IDENTITY)
 		private Long idtab_veiPorMotorista;
@@ -23,7 +23,7 @@ import jakarta.persistence.Table;
 		private Timestamp inicio_rota;
 		private Timestamp fim_rota;
 
-		public VeiPorMotorista() {	
+		public VeiPorMotorista() {
 		}
 		public VeiPorMotorista(Long idtab_veiPorMotorista, String marca, String modelo, String placa_veiculo, String cor_veiculo, String fabricacao,
 				Timestamp inicio_rota, Timestamp fim_rota) {
@@ -36,7 +36,7 @@ import jakarta.persistence.Table;
 			this.fabricacao = fabricacao;
 			this.inicio_rota = inicio_rota;
 			this.fim_rota = fim_rota;
-			
+
 		}
 		public Long getIdtab_veiPorMotorista() {
 			return idtab_veiPorMotorista;
@@ -86,5 +86,5 @@ import jakarta.persistence.Table;
 		public void setFim_rota(Timestamp fim_rota) {
 			this.fim_rota = fim_rota;
 		}
-		
+
 	}

@@ -20,7 +20,7 @@ public class MotoAndVeiDTO {
 	private String cidade;
 	private String bairro;
 	private String doc_img;
-	
+
 	// VeiPorMotoristaDTO //
 	private Long idtab_veiPorMotorista;
 	private String marca;
@@ -30,10 +30,10 @@ public class MotoAndVeiDTO {
 	private String fabricacao;
 	private Timestamp inicio_rota;
 	private Timestamp fim_rota;
-	
+
 	public MotoAndVeiDTO() {
 	}
-	
+
 	public MotoAndVeiDTO(Preposto Entity) {
 		idpreposto = Entity.getIdpreposto();
 		emailMotorista = Entity.getEmailMotorista();
@@ -48,7 +48,7 @@ public class MotoAndVeiDTO {
 		bairro = Entity.getBairro();
 		doc_img = Entity.getDoc_img();
 	}
-	
+
 	public MotoAndVeiDTO(VeiPorMotorista Entity) {
 		idtab_veiPorMotorista = Entity.getIdtab_veiPorMotorista();
 		marca = Entity.getMarca();

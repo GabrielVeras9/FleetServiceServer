@@ -14,16 +14,16 @@ import br.com.fleetmanagement.service.PosicaoService;
 @RestController
 @RequestMapping(value = "/posicao/veiculo")
 public class PosicaoController {
-	
+
 	@Autowired
 	private PosicaoService posicaoService;
-	
+
 	@GetMapping
 	public List<PosicaoDTO> finAll(){
 		List<PosicaoDTO> result = posicaoService.findAll();
-		return result; 
+		return result;
 	}
-	
+
 	@GetMapping(value = "/placa/{placaveiculo}")
     public List<PosicaoDTO> findByNome(@PathVariable String placaveiculo) {
         List<PosicaoDTO> result = posicaoService.findByPlaca(placaveiculo);

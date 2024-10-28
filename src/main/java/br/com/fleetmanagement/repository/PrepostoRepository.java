@@ -18,7 +18,6 @@ public interface PrepostoRepository extends JpaRepository<Preposto, Long> {
 		        SELECT public.tab_preposto.idpreposto, email_motorista, nome_motorista, cpf_motorista, rg_motorista, cnh_motorista, tipo_cnh, cep, cidade, bairro, doc_img FROM public.tab_preposto WHERE cpf_motorista = :cpf_motorista
 		        """)
 		    List<PrepostoProjection> searchByCpf(String cpf_motorista);
-		    
+
 		    Preposto findByEmailMotorista(String emailMotorista);
 }
-	

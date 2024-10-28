@@ -14,16 +14,16 @@ import br.com.fleetmanagement.service.TrajetoService;
 @RestController
 @RequestMapping(value = "/rota/trajeto")
 public class TrajetoController {
-	
+
 	@Autowired
 	private TrajetoService trajetoService;
 
 	@GetMapping
 	public List<TrajetoDTO> finAll(){
 		List<TrajetoDTO> result = trajetoService.findAll();
-		return result; 
+		return result;
 	}
-	
+
 	@GetMapping("/geojson")
     public ResponseEntity<String> obterRotaGeoJSON() {
         String rotaGeoJSON = trajetoService.obterGeoJSON(); // Chama o serviço para obter o JSON da rota

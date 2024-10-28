@@ -9,15 +9,24 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "vwe_dados_linhas")//, schema = "fleet_homol")
 public class Trajeto {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long idTrajeto;
+	public Long getIdTrajeto() {
+		return idTrajeto;
+	}
+
+	public void setIdTrajeto(Long idTrajeto) {
+		this.idTrajeto = idTrajeto;
+	}
+
 	private String extensao;
 	private String tempoMedio;
 	private String st_makeline;
-	
+
 	public Trajeto() {
-		
+
 	}
 
 	public Trajeto(String extensao, String tempoMedio, String st_makeline) {

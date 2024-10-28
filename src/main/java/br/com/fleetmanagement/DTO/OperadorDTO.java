@@ -8,7 +8,7 @@ public class OperadorDTO {
 	private Long idtab_operador;
 	private String nom_razao_social;
 	private String cnpj_operador;
-	
+
 	public OperadorDTO() {
 	}
 
@@ -17,7 +17,7 @@ public class OperadorDTO {
 		nom_razao_social = Entity.getNom_razao_social();
 		cnpj_operador = Entity.getCnpj_operador();
 	}
-	
+
 	public OperadorDTO(OperadorProjection Projection) {
 		idtab_operador = Projection.getIdTab_Operador();
 		nom_razao_social = Projection.getNom_Razao_Social();

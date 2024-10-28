@@ -9,7 +9,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "tab_rota_test")//, schema = "fleet_homol")
 public class RotaTeste {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -17,7 +17,7 @@ public class RotaTeste {
 	private Double longitude;
 	private Double extensao;
 	private Double tempo_medio;
-	
+
 	public RotaTeste() {
 	}
 

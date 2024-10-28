@@ -12,18 +12,18 @@ import br.com.fleetmanagement.repository.TrajetoRepository;
 
 @Service
 public class TrajetoService {
-	
+
 	@Autowired
 	private TrajetoRepository trajetoRepository;
-	
+
 	public List<TrajetoDTO> findAll(){
 		List<Trajeto> result = trajetoRepository.findAll();
 		return result.stream().map(x -> new TrajetoDTO(x)).toList();
 	}
-	
+
 	@Transactional(readOnly = true)
     public String obterGeoJSON() {
         return trajetoRepository.getGeoJSON();
-    };
+    }
 
 }

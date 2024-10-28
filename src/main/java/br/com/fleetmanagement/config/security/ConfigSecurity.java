@@ -17,46 +17,50 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 public class ConfigSecurity {
-	@Autowired
-	private SecurityFilter securityFilter;
-	
-	@Bean
-	public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception{
-		return httpSecurity
-				.csrf(csrf -> csrf.disable())
-				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-				.authorizeHttpRequests(authorize -> authorize
-						.requestMatchers(HttpMethod.GET, "/login").permitAll()
-						.requestMatchers(HttpMethod.GET, "/html/login.html").permitAll()
-						.requestMatchers(HttpMethod.POST, "/usuario/cadastrado/login").permitAll()
-						.requestMatchers(HttpMethod.POST, "/usuario/cadastrado/registrar").permitAll()
-					    .requestMatchers(HttpMethod.POST, "/cadastro/veiculo-preposto").hasRole("ADMIN")
-					    .requestMatchers(HttpMethod.POST, "/veiculo/cadastrado/frota/veicular").hasRole("ADMIN")
-					    .requestMatchers(HttpMethod.POST, "/api/rota/salvar").hasRole("ADMIN")
-					    .requestMatchers(HttpMethod.POST, "/documentos/upload").hasRole("ADMIN")
-					    //GETTER AS INFORMATION IN SYSTEM REQUER AUTH USER 
-					    .requestMatchers(HttpMethod.GET, "/index").hasRole("USER")
-					    .requestMatchers(HttpMethod.GET, "/html/index.html").hasRole("USER")
-					    .requestMatchers(HttpMethod.GET, "/css/style.css").hasRole("USER")
-					    .requestMatchers(HttpMethod.GET, "/js/script.js").hasRole("USER")
-					    .requestMatchers(HttpMethod.GET, "/veiculo/cadastrado").hasRole("USER")
-					    .requestMatchers(HttpMethod.GET, "/usuario/cadastrado").hasRole("USER")
-					    .requestMatchers(HttpMethod.GET, "/operador/operadoras").hasRole("USER")
-					    .requestMatchers(HttpMethod.GET, "/preposto/motorista").hasRole("USER")
-					    .requestMatchers(HttpMethod.GET, "/api/rota/geojson").hasRole("USER")
-					    .requestMatchers(HttpMethod.GET, "/servico/prestado").hasRole("USER")
-					    .requestMatchers(HttpMethod.GET, "/rota/trajeto").hasRole("USER")
-					    .anyRequest().authenticated()
-					)
-				.addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
-				.build();
-	}
-	
-	@Bean
-	public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
-		return authenticationConfiguration.getAuthenticationManager();
-	}
-	
-	@Bean 
-	public PasswordEncoder passwordEncoder() {return new BCryptPasswordEncoder();}
+    @Autowired
+    private SecurityFilter securityFilter;
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+        return httpSecurity
+                .csrf(csrf -> csrf.disable())
+                /*
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers(HttpMethod.GET, "/login").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/html/login.html").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/usuario/cadastrado/login").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/usuario/cadastrado/registrar").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/cadastro/veiculo-preposto").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/veiculo/cadastrado/frota/veicular").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/rota/salvar").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/documentos/upload").hasRole("ADMIN")
+                        // GETTER AS INFORMATION IN SYSTEM REQUER AUTH USER
+                        .requestMatchers(HttpMethod.GET, "/index").hasRole("USER")
+                        .requestMatchers(HttpMethod.GET, "/html/index.html").hasRole("USER")
+                        .requestMatchers(HttpMethod.GET, "/css/style.css").hasRole("USER")
+                        .requestMatchers(HttpMethod.GET, "/js/script.js").hasRole("USER")
+                        .requestMatchers(HttpMethod.GET, "/veiculo/cadastrado").hasRole("USER")
+                        .requestMatchers(HttpMethod.GET, "/usuario/cadastrado").hasRole("USER")
+                        .requestMatchers(HttpMethod.GET, "/operador/operadoras").hasRole("USER")
+                        .requestMatchers(HttpMethod.GET, "/preposto/motorista").hasRole("USER")
+                        .requestMatchers(HttpMethod.GET, "/api/rota/geojson").hasRole("USER")
+                        .requestMatchers(HttpMethod.GET, "/servico/prestado").hasRole("USER")
+                        .requestMatchers(HttpMethod.GET, "/rota/trajeto").hasRole("USER")
+                        .anyRequest().authenticated()
+                    )
+                .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
+                */
+                .build(); // Certifique-se de que o método termina com .build()
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+        return authenticationConfiguration.getAuthenticationManager();
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 }

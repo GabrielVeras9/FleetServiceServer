@@ -14,16 +14,16 @@ import br.com.fleetmanagement.service.OperadorService;
 @RestController
 @RequestMapping(value = "/operador/operadoras")
 public class OperadorController {
-	
+
 	@Autowired
 	private OperadorService operadorService;
-	
+
 	@GetMapping
 	public List<OperadorDTO> finAll(){
 		List<OperadorDTO> result = operadorService.findAll();
-		return result; 
+		return result;
 	}
-	
+
 	@GetMapping(value = "/{cnpj_operador}")
 	public List<OperadorDTO> findByList(@PathVariable String cnpj_operador) {
 		List <OperadorDTO> result = operadorService.FindByCnpj(cnpj_operador);

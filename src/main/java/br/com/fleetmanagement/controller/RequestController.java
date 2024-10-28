@@ -5,12 +5,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class RequestController {
-	
+
 	@GetMapping("/login")
     public String redirectToLogin() {
         return "redirect:/html/login.html";
     }
-	
+
 	@GetMapping("/login/registrar")
     public String redirectToRegistat() {
         return "redirect:/html/registrar.html";
@@ -19,6 +19,6 @@ public class RequestController {
     public String redirectToIndex() {
         return "redirect:/html/index.html";
     }
-	
+
 }
 

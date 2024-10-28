@@ -3,7 +3,7 @@ package br.com.fleetmanagement.DTO;
 import br.com.fleetmanagement.entity.Servico;
 
 public class ServicoDTO {
-	
+
 	private Long idservico;
 	private String desc_servico;
 	private String nom_servico;
@@ -29,5 +29,5 @@ public class ServicoDTO {
 	public String getNom_servico() {
 		return nom_servico;
 	}
-	
+
 }

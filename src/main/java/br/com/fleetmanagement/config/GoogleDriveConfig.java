@@ -2,7 +2,6 @@ package br.com.fleetmanagement.config;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.security.GeneralSecurityException;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,13 +14,15 @@ import com.google.api.services.drive.Drive;
 import com.google.auth.http.HttpCredentialsAdapter;
 import com.google.auth.oauth2.GoogleCredentials;
 
+import br.com.fleetmanagement.exception.GeneralSecurityException;
+
 @Configuration
 public class GoogleDriveConfig {
-	
+
 	private static final String CREDENTIALS_FILE_PATH = "src/main/resources/credentials.json";
 
     @Bean
-    public NetHttpTransport netHttpTransport() throws GeneralSecurityException, IOException {
+    public NetHttpTransport netHttpTransport() throws GeneralSecurityException, IOException, java.security.GeneralSecurityException {
         return GoogleNetHttpTransport.newTrustedTransport();
     }
 

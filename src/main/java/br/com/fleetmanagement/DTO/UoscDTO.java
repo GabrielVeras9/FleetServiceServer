@@ -19,32 +19,32 @@ public class UoscDTO {
 	private String cep;
 	private String cidade;
 	private String bairro;
-	
+
 	//(O)peradora//
 	private Long idtab_operador;
 	private String nom_razao_social;
 	private String cnpj_operador;
-	
+
 	//(S)ervico
 	private Long idservico;
 	private String desc_servico;
 	private String nom_servico;
-	
+
 	//(C)ontrato
 	private Long idtab_contrato;
 	private Integer num_contrato;
 	private Date ini_vigencia;
 	private Date fim_vigencia;
 	private String doc_contrato;
-	
+
 	public UoscDTO() {
 	}
 
 	public UoscDTO(Usuario Entity) {
-		idusuario = Entity.getIdusuarioLong();
+		idusuario = Entity.getIdusuario();
 		nom_usuario = Entity.getNom_usuario();
 		sen_usuario = Entity.getSen_usuario();
-		email = Entity.getemail();
+		email = Entity.getEmail();
 		cpf_usuario = Entity.getCpf_usuario();
 		rg_usuario = Entity.getRg_usuario();
 		cep = Entity.getCep();
@@ -151,5 +151,5 @@ public class UoscDTO {
 	public String getDoc_contrato() {
 		return doc_contrato;
 	}
-	
+
 }

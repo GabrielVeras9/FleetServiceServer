@@ -12,7 +12,7 @@ public class ContratoDTO {
 	private Date ini_vigencia;
 	private Date fim_vigencia;
 	private String doc_contrato;
-	
+
 	public ContratoDTO() {
 	}
 
@@ -23,7 +23,7 @@ public class ContratoDTO {
 		fim_vigencia = Entity.getFim_vigencia();
 		doc_contrato = Entity.getDoc_contrato();
 	}
-	
+
 	public ContratoDTO(ContratoProjection Projection) {
 		super();
 		idtab_contrato = Projection.getIdTab_Contrato();
@@ -52,5 +52,5 @@ public class ContratoDTO {
 	public String getDoc_contrato() {
 		return doc_contrato;
 	}
-	
+
 }

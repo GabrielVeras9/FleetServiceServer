@@ -1,6 +1,5 @@
 package br.com.fleetmanagement.entity;
 
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -10,7 +9,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "tab_veiculo")//, schema = "fleet_homol")
 public class Veiculo {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idtab_veiculo;
@@ -31,7 +30,7 @@ public class Veiculo {
 	}
 	public Veiculo(Long idtab_veiculo, String modelo, String marca, String ano_fabricacao, String renavam,
 			String cat_veiculo, String num_placa,String cepvei,String cidadevei,String bairrovei, String doc_veiculo, Boolean veiculo_ativo, String cor_veiculo) {
-		
+
 		this.idtab_veiculo = idtab_veiculo;
 		this.modelo = modelo;
 		this.marca = marca;
@@ -45,7 +44,7 @@ public class Veiculo {
 		this.doc_veiculo = doc_veiculo;
 		this.veiculo_ativo = veiculo_ativo;
 		this.cor_veiculo = cor_veiculo;
-		
+
 	}
 	public Long getIdtab_veiculo() {
 		return idtab_veiculo;
@@ -125,5 +124,5 @@ public class Veiculo {
 	public void setCor_veiculo(String cor_veiculo) {
 		this.cor_veiculo = cor_veiculo;
 	}
-	
+
 }

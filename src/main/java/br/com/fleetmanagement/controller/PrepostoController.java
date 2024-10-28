@@ -21,14 +21,14 @@ import br.com.fleetmanagement.service.PrepostoService;
 @RestController
 @RequestMapping(value = "/preposto/motorista")
 public class PrepostoController {
-	
+
 	@Autowired
 	private PrepostoService prepostoService;
 
 	@GetMapping
 	public List<PrepostoDTO> finAll(){
 		List<PrepostoDTO> result = prepostoService.findAll();
-		return result; 
+		return result;
 	}
 	@GetMapping(value = "/nome/{nome_motorista}")
     public List<PrepostoDTO> findByNom(@PathVariable String nome_motorista) {
@@ -41,20 +41,20 @@ public class PrepostoController {
         List<PrepostoDTO> result = prepostoService.findByCpf(cpf_motorista);
         return result;
     }
-    
+
     @PostMapping(value ="/login")
     public ResponseEntity<?> login(@RequestBody PrepostoDTO prepostoDTO) {
         try {
         	Preposto preposto = prepostoService.autenticar(prepostoDTO.getEmailMotorista(), prepostoDTO.getSenha_motorista());
-        
+
             return ResponseEntity.ok("Login realizado com sucesso para o usuário: " + preposto.getEmailMotorista());
         } catch (UsuarioNaoEncontradoException | SenhaIncorretaException e) {
-           
+
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Falha na autenticação: " + e.getMessage());
         } catch (Exception e) {
-            
+
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro: " + e.getMessage());
         }
-    }	
+    }
 
 }

@@ -18,10 +18,10 @@ public class VeiculoDTO {
 		private String doc_veiculo;
 		private Boolean veiculo_ativo;
 		private String cor_veiculo;
-		
+
 		public VeiculoDTO() {
 		}
-		
+
 		public VeiculoDTO(Veiculo Entity) {
 			idtab_veiculo = Entity.getIdtab_veiculo();
 			modelo = Entity.getModelo();
@@ -37,7 +37,7 @@ public class VeiculoDTO {
 			veiculo_ativo = Entity.getVeiculo_ativo();
 			cor_veiculo = Entity.getCor_veiculo();
 		}
-		
+
 		public VeiculoDTO(VeiculoProjection Projection) {
 			num_placa = Projection.getNum_Placa();
 			cor_veiculo = Projection.getCor_Veiculo();
@@ -149,6 +149,6 @@ public class VeiculoDTO {
 		public void setCor_veiculo(String cor_veiculo) {
 			this.cor_veiculo = cor_veiculo;
 		}
-		
+
 	}
 
